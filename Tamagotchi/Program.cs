@@ -57,11 +57,12 @@ namespace Tamagotchi
                 }
             }
 
-            void ContinueButton()
-            {
-                System.Console.WriteLine("\nPress any key to continue");
-                Console.ReadKey();
-            }
+            System.Console.WriteLine($"{myTama.name} died...");
+        }
+        static void ContinueButton()
+        {
+            System.Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
         }
     }
 }
