@@ -5,12 +5,20 @@ namespace Tamagotchi
 {
     public class Tamagotchi
     {
+        public static List<Tamagotchi> list = new List<Tamagotchi>();
+        static TimeSpan tickTime = new TimeSpan(0, 1, 0);
         public string name;
         int hunger;
         int boredom;
         List<string> words = new List<string>();
         bool isAlive = true;
-        Random generator = new Random();
+        static Random generator = new Random();
+        
+
+        public Tamagotchi()
+        {
+            list.Add(this);
+        }
 
         public void Feed()
         {
@@ -37,6 +45,14 @@ namespace Tamagotchi
         }
         public void Tick()
         {
+            DateTime startTime;
+            DateTime end = tickTime;
+
+            if (startTime > )
+            {
+                
+            }
+
             hunger++;
             boredom++;
 

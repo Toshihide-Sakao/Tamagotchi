@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Tamagotchi
 {
@@ -7,6 +8,8 @@ namespace Tamagotchi
         static void Main(string[] args)
         {
             Tamagotchi myTama = new Tamagotchi();
+            Thread t = new Thread(new ThreadStart());
+            t.Start();
 
             Console.WriteLine("Name your tamagotchi");
             myTama.name = Console.ReadLine();
@@ -70,7 +73,11 @@ namespace Tamagotchi
 
         public static void ThreadProc()
         {
-            
+            for (int i = 0; i < 10; i++)
+            {
+                System.Console.WriteLine("ticked ok right");
+                Thread.Sleep(5000);
+            }
         }
 
         static void ContinueButton()
