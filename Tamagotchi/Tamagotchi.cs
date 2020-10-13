@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Collections.Generic;
 
 namespace Tamagotchi
@@ -6,7 +7,9 @@ namespace Tamagotchi
     public class Tamagotchi
     {
         public static List<Tamagotchi> list = new List<Tamagotchi>();
-        static TimeSpan tickTime = new TimeSpan(0, 1, 0);
+        public static List<Thread> threads = new List<Thread>();
+        static TimeSpan tickTime = new TimeSpan(0, 5, 0);
+        DateTime start = DateTime.Now;
         public string name;
         int hunger;
         int boredom;
@@ -15,14 +18,15 @@ namespace Tamagotchi
         static Random generator = new Random();
         
 
-        public Tamagotchi()
+        public Tamagotchi(Thread thread)
         {
             list.Add(this);
+            threads.Add(thread);
         }
 
         public void Feed()
         {
-            hunger--;
+            hunger -= generator.Next(1, 3);
         }
         public void Hi()
         {
@@ -45,20 +49,20 @@ namespace Tamagotchi
         }
         public void Tick()
         {
-            DateTime startTime;
-            DateTime end = tickTime;
+            DateTime time = DateTime.Now;
+            DateTime restartTime = start + tickTime;
 
-            if (startTime > )
+            if (time > restartTime)
             {
-                
+                hunger++;
+                boredom++;
+                start = DateTime.Now;
             }
-
-            hunger++;
-            boredom++;
 
             if (hunger == 10 || boredom == 10)
             {
                 isAlive = false;
+                list.Remove(this);
             }
         }
         public void PrintStats()
@@ -75,7 +79,17 @@ namespace Tamagotchi
         }
         void ReduceBoredom()
         {
-            boredom--;
+            boredom -= generator.Next(1, 3);
+        }
+
+
+        //My own Methods
+        public static void ViewList()
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"{i - 1}: {list[i].name}");
+            }
         }
     }
 }
